@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-at" lang="de-at">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.53" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TicTacToe &middot; Lerne Programmieren</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Lerne Programmieren" />
+
+  <style type="text/css">
+    .sidebar-about h1 {
+        font-size:1.8rem;
+        font-weight:400;
+    }
+    figure {
+        margin:1rem;
+    }
+    figcaption h4 {
+        font-size:0.8rem;
+        font-weight:normal;
+        font-style:italic;
+        color:#999;
+    }
+</style>
+</head>
+
+  <body class="theme-base-0c ">
+  <aside class="sidebar">
+    <div class="container">
+        <div class="sidebar-about">
+            <a href="http://example.org/"><h1>Lerne Programmieren</h1></a>
+            <p class="lead">
+                 Einfach, ohne Vorkenntnisse, online programmieren lernen. 
+            </p>
+        </div>
+
+        <nav>
+            <ol class="sidebar-nav">
+                <li><a href="/lektionen/tictactoe/"> TicTacToe </a></li>
+            </ol>
+        </nav>
+
+        <p>&copy; 2018. All rights reserved. </p>
+    </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>TicTacToe</h1>
+  <time datetime=2018-12-28T11:33:38Z class="post-date">Fri, Dec 28, 2018</time>
+  
+
+<script src="https://unpkg.com/kotlin-playground@1" data-selector=".language-kotlin"></script>
+
+<p>Hallo!</p>
+
+<p>Gratulation zur deiner Entscheidung programmieren zu lernen. Programmieren zu können gibt dir die Möglichkeit neue Dinge von Grund auf zu erschaffen und eröffnet dir eine völlig neue Welt der Möglichkeiten mit deinem Computer umzugehen.</p>
+
+<p>Egal ob du Spiele, Apps, Webseiten oder sonstige Anwendungen entwickeln willst, die Grundlagen dazu sind immer die gleichen. Es gibt zwar eine Vielzahl an verschiedenen Programmiersprachen doch im Grunde stecken nur einige wenige Konzepte dahinter die sich in all diesen Programmiersprachen wiederfinden. Wir konzentrieren uns in diesem Kurs darauf diese Konzepte auf einfache, anschauliche und interaktive Art und Weise zu vermitteln.</p>
+
+<p>Natürlich wollen wir das ganze praktisch greifbar machen und auch Ergebnisse sehen. Als erstes werden wir daher den Spiele-Klassiker TicTacToe entwickeln. Wir werden anhand dieses Beispiels die ersten Grundlagen des Programmierens erlernen und ein komplett funktionstüchtiges Spiel entwickeln.</p>
+
+<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+import org.w3c.dom.events.Event
+import org.w3c.dom.events.MouseEvent
+import kotlin.math.PI
+
+val PLAYING = 0
+val WON = 1
+val TIE = 2
+
+var field = Array(9) { "_" }
+var gameStatus = PLAYING
+var currentPlayer = "X"
+var move = 0
+
+fun drawField() {
+    context2d.save()
+    context2d.beginPath()
+
+    context2d.moveTo(0.0, 100.0)
+    context2d.lineTo(300.0, 100.0)
+
+    context2d.moveTo(0.0, 200.0)
+    context2d.lineTo(300.0, 200.0)
+
+    context2d.moveTo(100.0, 0.0)
+    context2d.lineTo(100.0, 300.0)
+
+    context2d.moveTo(200.0, 0.0)
+    context2d.lineTo(200.0, 300.0)
+
+    context2d.stroke()
+    context2d.restore()
+}
+
+fun updateStatus() {
+    val statusText = when (gameStatus) {
+        PLAYING -> "Spieler $currentPlayer ist an der Reihe"
+        WON -> "Spieler $currentPlayer hat gewonnen!"
+        else -> "Untentschieden"
+    }
+    
+    val textWidth = context2d.measureText(statusText).width
+
+    context2d.save()
+    context2d.clearRect(0.0, 300.0, 300.0, 50.0)
+    context2d.fillText(statusText, (300 - textWidth) / 2, 325.0)
+    context2d.restore()
+}
+
+fun drawStone(num : Int, player : String) {
+    val row = num / 3
+    val column = num % 3
+
+    val top = row * 100.0 + 45.0
+    val left = column * 100.0 + 45.0
+
+    context2d.save()
+    context2d.translate(left, top)
+    context2d.beginPath()
+    context2d.lineWidth = 2.0
+
+    if (player == "X") {
+        context2d.moveTo(0.0, 0.0)
+        context2d.lineTo(10.0, 10.0)
+        context2d.moveTo(0.0, 10.0)
+        context2d.lineTo(10.0, 0.0)
+    } else {
+        context2d.arc(5.0, 5.0, 5.0, 0.0, 2 * PI)
+    }
+
+    context2d.stroke()
+    context2d.restore()
+}
+
+fun isSamePlayer(idx1 : Int, idx2 : Int, idx3: Int) : Boolean {
+    return field[idx1] != "_" && field[idx1] == field[idx2] && field[idx2] == field[idx3]
+}
+
+fun checkWin() : Boolean {
+    val winPositions = arrayOf(
+            intArrayOf(0, 1, 2),
+            intArrayOf(3, 4, 5),
+            intArrayOf(6, 7, 8),
+            intArrayOf(0, 3, 6),
+            intArrayOf(1, 4, 7),
+            intArrayOf(2, 5, 8),
+            intArrayOf(0, 4, 8),
+            intArrayOf(2, 4, 6)
+    )
+
+    for (pos in winPositions) {
+        if (isSamePlayer(pos[0], pos[1], pos[2])) {
+            context2d.save()
+            context2d.strokeStyle = "#4F4"
+            drawStone(pos[0], currentPlayer)
+            drawStone(pos[1], currentPlayer)
+            drawStone(pos[2], currentPlayer)
+            context2d.restore()
+            return true
+        }
+    }
+
+    return false
+}
+
+fun setStone(num : Int) {
+    if (field[num] != "_") {
+        return
+    }
+
+    field[num] = currentPlayer
+    drawStone(num, currentPlayer)
+    move = move + 1
+
+    val winPosition = checkWin()
+
+    if (winPosition) {
+        gameStatus = WON
+    } else if (move == 9) {
+        gameStatus = TIE
+    } else {
+        currentPlayer = if (currentPlayer == "X") "O" else "X"
+    }
+
+    updateStatus()
+}
+
+fun reset() {
+    field = Array(9) { "_" }
+    gameStatus = PLAYING
+    currentPlayer = "X"
+    move = 0
+    context2d.clearRect(0.0, 0.0, 300.0, 350.0)
+    drawField()
+    updateStatus()
+}
+
+fun onClick(event : Event) {
+    event as MouseEvent
+
+    if (gameStatus == PLAYING) {
+        val row = event.clientY / 100
+        val column = event.clientX / 100
+
+        setStone(row * 3 + column)
+    } else {
+        reset()
+    }
+}
+
+fun startGame() {
+    canvas.onclick = ::onClick
+    reset()
+}
+
+fun main() {
+//sampleStart
+    startGame()
+//sampleEnd
+}
+</pre>
+
+<p>Starte das Spiel indem du im Code-Block oben auf den grünen Start-Knopf auf der rechten Seite klickst. Spiele einige male um ein Gefühl für das Spiel zu bekommen. Am Ende der Runde, kannst du es mit einem Klick irgendwo auf das Spielfeld erneut starten.</p>
+
+<p>In Kurzer Zeit wirst du dieses TicTacToe Spiel selbst von Grund auf entwickelt haben und genau verstehen was im Hintergrund passiert! Dieses Wissen kannst du dann schon dazu verwenden andere kleine Spiele oder Anwendungen selbst zu programmieren.</p>
+
+<h1 id="die-wahl-der-programmiersprache">Die Wahl der Programmiersprache</h1>
+
+<p>Für den Kursinhalt haben wir uns für die Programmiersprache Kotlin entschieden. Kotlin ist eine relativ neue, moderne Programmiersprache die in verschiedensten Umgebungen eingesetzt werden kann. So lassen sich damit zum Beispiel Handy-Apps, Browser-Basierte Spiele sowie Server-Anwendungen entwickeln. Kotlin vereint zudem in sich eine große Anzahl von Programmierkonzepten die sich auch in anderen Programmiersprachen wiederfinden. Dabei erlaubt Kotlin uns ganz einfach zu beginnen und Schritt für Schritt neue Dinge zu erklären.</p>
+
+<p><strong>Warum lernen wir nicht die Programmiersprache Javascript, Java, Python, Scala, PHP, Swift, C#, C, C++, Rust oder eine ganz andere?</strong><br />
+Ganz einfach, weil es wie du siehst sehr viele davon gibt und wir uns für eine entscheiden müssen :-) Wie bereits erwähnt sind deine neu erworbenen Kenntnisse zum Großteil das Verständnis von zugrunde liegenden Konzepten die sich in all diesen Sprachen wiederfinden. Es kommen jedes Jahr zig neue Programmiersprachen auf den Markt, neue Programmierkonzepte hingegen sind dagegen aber eher sehr selten. Ein erfahrener Software-Entwickler kann relativ einfach von einer Programmiersprache zu einer anderen wechseln. Ich persönlich habe mit fast allen der oben erwähnten Sprachen bereits gearbeitet. Der Einstieg in eine weitere Sprache dauert nur noch wenige Tage für mich.</p>
+
+<p><strong>Warum gibt es dann diese ganzen verschiedenen Programmiersprachen überhaupt?</strong><br />
+Verschiedene Sprachen haben verschiedene Hintergründe und sind oft für einen bestimmten Zweck optimiert. So eignen sich unterschiedliche Sprachen unterschiedlich gut für bestimmte Aufgaben. Zum Beispiel wurde PHP für das Erstellen von dynamischen Webseiten entwickelt und erfreut sich in diesem Bereich großer Beliebtheit. Dafür würde wohl kaum jemand auf die Idee kommen PHP für die Motor-Steuerung in einem Auto zu verwenden. In diesem Bereich sind C, C++ oder Rust aufgrund ihrer spezifischen-Eigenschaften besser geeignet.</p>
+
+<p>Nach erfolgreichem Abschluss des Kurses hast du mit Kotlin eine sehr mächtige, breit einsetzbare Programmiersprache erlernt und dir wird es bei Bedarf auch einfach fallen dich in einer anderen Programmiersprache zurecht zu finden.</p>
+
+<h1 id="was-ist-programmieren-überhaupt-wie-funktioniert-es">Was ist Programmieren überhaupt? Wie funktioniert es?</h1>
+
+<p>Wenn du das fertige TicTacToe Spiel oben spielst, hast du ein fertiges Programm vor dir und weißt genau wie es funktionieren soll. Die Kunst des Programmierens ist es diese Vorstellung des fertigen Programms, welches anfangs nur in deinem Kopf existiert, so zu formulieren dass es ein Computer versteht.</p>
+
+<p>Egal was du programmieren möchtest, du musst zuerst eine Idee in deinem Kopf haben wie das Ergebnis aussehen soll. Du kannst dir die Dinge auch aufzeichnen wie sie am Bildschirm aussehen sollen und dir überlegen wie der Benutzer mit dem Programm interagiert. Erst wenn das Bild in deinem Kopf für dich klar genug ist, kannst du beginnen deine Vision in für Computer verständliche Sprache zu übersetzen.</p>
+
+<p>Nehmen wir als Beispiel eine Stoppuhr. Wir möchten eine Stoppuhr programmieren die die vergangene Zeit misst. Diese Beschreibung alleine ist noch viel zu ungenau um sie in ein fertiges Programm zu gießen. Wahrscheinlich ist deine Vorstellung der Stoppuhr eine ganz andere als meine.</p>
+
+<p>Sie könnte zum Beispiel so aussehen:</p>
+
+<figure>
+    <img src="images/stopwatch-digital.png"
+         alt="digitale stoppuhr" width="300"/> <figcaption>
+            <h4>digitale Stoppuhr</h4>
+        </figcaption>
+</figure>
+
+
+<p>Oder auch so:</p>
+
+<figure>
+    <img src="images/stopwatch-analog.png"
+         alt="analoge stoppuhr" width="200"/> <figcaption>
+            <h4>analoge Stoppuhr (Quelle: pixbay.com Lizenz: CC0 Creative Commons)</h4>
+        </figcaption>
+</figure>
+
+
+<p>Welchen Zeitraum wollen wir überhaupt messen? Hundertstel-Sekunden? Sekunden? Minuten? Stunden? Tage? vielleicht sogar Jahre? oder Jahrzehnte? Je nachdem wird die Uhr wohl ganz anders aussehen müssen. Die analoge Version oben mit dem Zifferblatt ist für einen Zeitraum der sich über mehrere Stunden oder länger erstreckt praktisch ungeeignet, für Sekunden und Minuten bis zu einer Stunde aber sehr gut.</p>
+
+<p>Was muss der Benutzer tun um die Uhr zu starten und zu stoppen? Auf die Uhr klicken? Zum stoppen nochmals klicken? Die Leertaste drücken? Gibt es einen eigenen Knopf dafür? All diese Dinge sollten wir uns überlegen bevor wir mit dem Schreiben von Programmcode starten. Je klarer uns ist wie die Uhr funktionieren soll, desto einfacher wird es sein sie zu programmieren.</p>
+
+<p>Nehmen wir als Beispiel von hier an die Analoge Uhr von oben. Mit einem Klick irgendwo auf die Uhr soll sie gestartet werden und einem weiteren wieder gestoppt.</p>
+
+<p>Nachdem wir eine genau Vorstellung haben wie unser fertiges Programm aussieht und der Benutzer mit ihm interagieren kann, wird das Programm in seine Einzelteile zerlegt die dann in Code verfasst werden. Wie genau die Einzelteile aussehen und miteinander interagieren ist flexibel und es ist die Aufgabe des Software-Entwicklers das zu entscheiden. Das ganze ist ein kreativer Prozess der etwas Übung bedarf.</p>
+
+<p>Wir können die oben genannte Stoppuhr zum Beispiel so aufteilen:</p>
+
+<ul>
+<li>Zeichne die Uhr (ohne Zeiger) als Hintergrundbild. Dazu müssen wir ein Bild der Uhr haben auf dem keine Zeiger sichtbar sind.</li>
+<li>Zeichne die beiden Zeiger in neutraler Position (beide zeigen gerade nach oben).</li>
+<li>Nachdem der Benutzer auf die Uhr geklickt hat führe jede Sekunde folgende Schritte aus:
+
+<ul>
+<li>Bewege den Sekundenzeiger ein Stück weiter im Uhrzeigersinn.</li>
+<li>Wenn eine Minute vergangen ist, bewege den Minutenzeiger ein Stück weiter im Uhrzeigersinn.</li>
+</ul></li>
+<li>Wenn der Benutzer auf die Uhr klickt und diese aktuell läuft, stoppe sie.</li>
+</ul>
+
+<p>Diese einzelnen Schritte können nun in Programmcode übersetzt werden. Dies ist einer der Hauptaufgaben beim Meistern des Programmierens. Dazu möchten wir an dieser Stelle aber nicht lange theoretisch reden sondern in den nächsten Abschnitten direkt in die Praxis übergehen und unser TicTacToeSpiel programmieren.</p>
+
+<h1 id="tictactoe">TicTacToe</h1>
+
+<p>Wenn du das Spiel von oben einige male gespielt hast, hast du bereits eine sehr gute Vorstellung wie das fertige Programm aussieht und wie der Benutzer damit interagieren kann. Falls du es noch nicht gespielt hast, solltest du das jetzt nachholen. Nur wenn du gut weißt, was du eigentlich programmieren möchtest kannst du zu deinem Ziel kommen.</p>
+
+<p>Im nächsten Schritt überlegen wie wir, ähnlich wie bei der Stoppuhr, wie wir das Problem in Einzelteile zerlegen können. Wir werden dabei diesem groben Plan folgen:</p>
+
+<ul>
+<li>Zuerst zeichnen wir das Spielfeld</li>
+<li>Wenn der Benutzer auf ein Kästchen im Spielfeld klickt, zeichnen wir dort das Symbol des aktuellen Spielers (X oder O)</li>
+<li>Wenn 3 Felder in einer Linie (horizontal, vertikal oder diagonal) gleich sind, ist das Spiel vorbei</li>
+<li>Wenn alle 9 Felder voll sind, ist das Spiel auch vorbei (unentschieden)</li>
+<li>Wenn der Benutzer auf das Spielfeld klickt, und das Spiel gerade vorbei ist, starten wir das Spiel erneut:
+
+<ul>
+<li>Wir löschen den Inhalt des gesamten Spielfelds</li>
+<li>Wir zeichnen das Spielfeld (wie im 1. Schritt)</li>
+</ul></li>
+</ul>
+
+<p>Wir haben bewusst noch einige Teile ausgelassen, die wir erst später hinzufügen werden. Zum Beispiel haben wir uns noch keine Gedanken über den Statustext am unteren Ende des Spielfelds Gedanken gemacht. Auch die grüne Markierung wenn ein Spieler gewonnen hat, haben wir noch nicht beachtet.</p>
+
+<h2 id="das-spielfeld-canvas-und-seine-linien">Das Spielfeld - Canvas und seine Linien</h2>
+
+<p>Unser Spiel wird ein Browser basiertes Spiel. Als <code>Browser</code> oder auch <code>Web-Browser</code> bezeichnet man das Programm mit dem man im Internet surft. Es gibt viele verschiedene Browser wie zum Beispiel Mozilla Firefox, Google Chrome, Safari oder Opera.</p>
+
+<p>Auch wenn diese Browser-Programme alle unterschiedlich heißen und von unterschiedlichen Herstellern sind, bieten sie für Programmierer eine einheitliche Schnittstelle wie Code ausgeführt werden kann. Das bedeutet dass du dein fertiges Spiel in jede beliebige Webseite einbinden kannst. Ohne dass der Benutzer eine extra App oder ein Programm herunterladen muss, kann er direkt in seinem Browser dein Spiel spielen. Egal ob er am Android-Handy, Laptop, Mac, oder Windows PC unterwegs ist, Firefox, Safari, Chrome oder einen anderen Browser verwendet, dein Spiel sieht immer gleich aus und funktioniert auch immer gleich.</p>
+
+<p>Eine Schnittstelle die der Browser bietet und somit auch in der Programmiersprache Kotlin zur Verfügung steht ist das sogenannte <code>canvas</code>. Das Wort &ldquo;canvas&rdquo; ist englisch und bedeutet direkt übersetzt &ldquo;Leinwand&rdquo;.</p>
+
+<blockquote>
+<p>In der Welt der Programmierung ist nahezu alles auf Englisch gehalten, daher wirst du zu einem gewissen Grad nicht ganz um Englisch herum kommen. Viele Fachbegriffe haben überhaupt keine oder keine gute Übersetzung ins Deutsche. Je besser du dich mit Englisch anfreunden kannst, desto leichter wird dir vieles beim Programmieren fallen.</p>
+</blockquote>
+
+<p>Was können wir also mit unserem canvas machen? Na logisch, wir können darauf zeichen und das entweder in 2D oder 3D! Für unser TicTacToe Spiel reicht 2D völlig aus. Stell dir ein Blatt Papier vor auf dem wir einen Stift bewegen. Wir können ihn in gerader Linie bewegen, ihn aufheben und an eine andere Stelle setzten, wir können Kreise und Kurven zeichnen.</p>
+
+<p>TODO: Video mit erklärung des Canvas
+- Blatt papier, Kariert, moveTo, lineTo, arc</p>
+
+<p>Unser canvas hat eine Breite von <code>300</code> und eine Höhe von <code>350</code>. Mittels <code>context2d</code> können wir in 2D auf unserem canvas zeichnen. Hier der Programmcode um eine Line von links oben nach rechts unten zu zeichnen.</p>
+
+<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+fun main() {
+//sampleStart
+    context2d.beginPath()
+    context2d.moveTo(0.0, 0.0)
+    context2d.lineTo(300.0, 350.0)
+    context2d.stroke()
+//sampleEnd
+}
+</pre>
+
+<p>In der ersten Zeile sagen wir unserer 2D Zeichenumgebung, dass wir einen neuen Pfad beginnen. Wir nehmen also praktisch unsere Füllfeder in die Hand.</p>
+
+<p>In der 2. Zeile bewegen wir die Füllfeder an die Position an der wir zu Zeichnen beginnen wollen. Die erste Zahl <code>0.0</code> gibt dabei die <code>x</code>-Koordinate, also die Position von links nach rechts an. Ganz links ist dabei die Position <code>0.0</code>. Da unser canvas wie oben beschrieben <code>300</code> breit ist, ist <code>300.0</code> ganz rechts und <code>150.0</code> in der Mitte. Die zweite Zahl gibt die <code>y</code>-Koordinate, also die Position von oben nach unten an. <code>0.0</code> ist dabei ganz oben und <code>350.0</code> wäre ganz unten, weil unser canvas eine Höhe von <code>350</code> hat. Wir haben also unsere Füllfeder ganz links oben positioniert.</p>
+
+<p>In der 3. Zeile zeichnen wir eine gerade Line zum Punkt x <code>300.0</code> (also ganz rechts) und y <code>350.0</code> (also ganz unten).</p>
+
+<p>In der 4. Zeile sagen wir schließlich unserer Zeichenumgebung, dass wir gerne den Pfad den wir vorhin mit der Füllfeder abgefahren sind mit einem <code>stroke</code> (deutsch Pinselstrich) zeichnen wollen. Ohne dieser letzten Anweisung bleibt unser Pfad unsichtbar.</p>
+
+<p>Es ist bei all diesen Anweisungen dabei wichtig, dass wir die Zahlen die Koordinaten (x und y) darstellen mit mindestens einer Nachkommastelle angeben zB. <code>0.0</code> anstatt einfach nur <code>0</code>. Warum genau lernen wir etwas später wenn wir über Datentypen reden.</p>
+
+<blockquote>
+<p>Viele Code-Blöcke in diesem Kurs sind bearbeitbar und können ausgeführt werden. Du bist herzlich eingeladen mit jedem einzelnen dieser Blöcke zu spielen. Je mehr du mit dem Code experimentierst und verschiedene Dinge ausprobierst, desto schneller wirst du verstehen was passiert. Keine Angst, du kannst nichts kaputt machen :-) Wenn du diese Seite neu lädst werden alle Code-Felder zurückgesetzt.</p>
+</blockquote>
+
+<p>Schaffst du es den Code von oben so zu bearbeiten, dass wir eine zweite Line von links unten nach rechts oben erhalten?
+Los gehts, versuche dich darin! Probier es aus :-)</p>
+
+<p>…</p>
+
+<p>Bist du zu einer Lösung gekommen?</p>
+
+<p>Hier ein Tipp: Du kannst einfach nachdem die Linie nach rechts unten gezeichnet wurde die Füllfeder mittels <code>moveTo</code> nach links unten bewegen und eine Linie mittels <code>lineTo</code> nach rechts oben zeichnen.</p>
+
+<p>Falls es noch nicht geklappt hat, versuch es nochmals selbst bevor du dir die Lösung unten ansiehst.</p>
+
+<p>…</p>
+
+<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+fun main() {
+//sampleStart
+    context2d.beginPath()
+    context2d.moveTo(0.0, 0.0)
+    context2d.lineTo(300.0, 350.0)
+    context2d.moveTo(0.0, 350.0)
+    context2d.lineTo(300.0, 0.0)
+    context2d.stroke()
+//sampleEnd
+}
+</pre>
+
+<p>Mit deinem neuen Wissen hast du alles was du benötigst um das Tic-Tac-Toe Spielfeld zu zeichnen. Es sind einfach zwei horizontale und 2 vertikale Linien. Wir zeichnen unser Spielfeld auf einer Größe von <code>300 x 300</code>. Somit müssen wir im Abstand von <code>100</code> jeweils unsere Linien zeichnen. Die unteren <code>50</code> Einheiten halten wir uns für den Statustext der anzeigt welcher Spieler gerade an der Reihe ist frei.</p>
+
+<p>Los geht&rsquo;s!</p>
+
+<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+fun main() {
+//sampleStart
+    context2d.beginPath()
+    
+    [mark]// von dir auszufüllen[/mark]
+    
+    context2d.stroke()
+//sampleEnd
+}
+</pre>
+
+<p>Geschafft?</p>
+
+<p>Ich zeige dir hier meine Lösung. Es gibt aber auch viele andere richtige Varianten. Zum Beispiel spielt es keine Rolle in welcher Reihenfolge oder Richtung wir die einzelnen Linien Zeichnen.</p>
+
+<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+fun main() {
+//sampleStart
+    context2d.beginPath()
+    
+    // 1. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 100.0)
+    context2d.lineTo(300.0, 100.0)
+    
+    // 2. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 200.0)
+    context2d.lineTo(300.0, 200.0)
+    
+    // 1. vertikale Linie von oben nach unten
+    context2d.moveTo(100.0, 0.0)
+    context2d.lineTo(100.0, 300.0)
+    
+    // 2. vertikale Linie von oben nach unten
+    context2d.moveTo(200.0, 0.0)
+    context2d.lineTo(200.0, 300.0)
+    
+    context2d.stroke()
+//sampleEnd
+}
+</pre>
+
+<p>In dieser Lösung sind noch zwei neue Dinge, die wir bisher noch nicht gesehen haben.</p>
+
+<p>Wir haben manchmal Zeilen für bessere Lesbarkeit frei gelassen. Kotlin ignoriert alle Zeilen auf denen kein Text steht. Du kannst Zeilen freilassen um zusammengehörigen Code zu gruppieren. Wie genau du deinen Code gruppierst ist zum großteil Geschmacksache und dir überlassen.</p>
+
+<p>Wir haben Kommentare eingefügt die beschreiben was geschieht. Alle Zeilen die mit zwei Schrägstrichen <code>//</code> beginnen werden von Kotlin ignoriert. Diese sind nur für Menschen gedacht. Du kannst dir selbst so viele Kommentare setzten wie du möchtest. Kommentare sind ein wichtiges Werkzeug um den Code zu dokumentieren. So kennst du dich selbst gleich wieder aus, auch wenn du nach einigen Monaten erst wieder zu dem Code zurückkehrst und auch andere Entwickler können mit guten Kommentaren deinen Code viel schneller verstehen.</p>
+
+<p><strong>Gratulation!</strong> Du hast den ersten Schritt unseres Spiels geschafft! Das Spielfeld ist erfolgreich dargestellt. Im nächsten Abschnitt werden wir lernen unsere X und O Spielsteine zu zeichnen.</p>
+
+</div>
+
+
+    </main>
+
+    
+  </body>
+</html>
