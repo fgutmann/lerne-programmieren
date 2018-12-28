@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lektionens on Lerne Programmieren</title>
-    <link>http://example.org/lektionen/</link>
+    <link>https://fgutmann.github.io/lerne-programmieren/lektionen/</link>
     <description>Recent content in Lektionens on Lerne Programmieren</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de-at</language>
     <lastBuildDate>Fri, 28 Dec 2018 11:33:38 +0000</lastBuildDate>
     
-	<atom:link href="http://example.org/lektionen/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://fgutmann.github.io/lerne-programmieren/lektionen/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>TicTacToe</title>
-      <link>http://example.org/lektionen/tictactoe/</link>
+      <link>https://fgutmann.github.io/lerne-programmieren/lektionen/tictactoe/</link>
       <pubDate>Fri, 28 Dec 2018 11:33:38 +0000</pubDate>
       
-      <guid>http://example.org/lektionen/tictactoe/</guid>
+      <guid>https://fgutmann.github.io/lerne-programmieren/lektionen/tictactoe/</guid>
       <description>Hallo!
 Gratulation zur deiner Entscheidung programmieren zu lernen. Programmieren zu können gibt dir die Möglichkeit neue Dinge von Grund auf zu erschaffen und eröffnet dir eine völlig neue Welt der Möglichkeiten mit deinem Computer umzugehen.
 Egal ob du Spiele, Apps, Webseiten oder sonstige Anwendungen entwickeln willst, die Grundlagen dazu sind immer die gleichen. Es gibt zwar eine Vielzahl an verschiedenen Programmiersprachen doch im Grunde stecken nur einige wenige Konzepte dahinter die sich in all diesen Programmiersprachen wiederfinden.</description>

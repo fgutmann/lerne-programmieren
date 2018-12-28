@@ -3,29 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/lektionen/tictactoe/</loc>
+    <loc>https://fgutmann.github.io/lerne-programmieren/lektionen/tictactoe/</loc>
     <lastmod>2018-12-28T11:33:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://fgutmann.github.io/lerne-programmieren/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/lektionen/</loc>
-    <lastmod>2018-12-28T11:33:38+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.org/</loc>
+    <loc>https://fgutmann.github.io/lerne-programmieren/lektionen/</loc>
     <lastmod>2018-12-28T11:33:38+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://fgutmann.github.io/lerne-programmieren/</loc>
+    <lastmod>2018-12-28T11:33:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://fgutmann.github.io/lerne-programmieren/tags/</loc>
     <priority>0</priority>
   </url>
   
