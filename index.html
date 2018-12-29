@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>TicTacToe - Lerne Programmieren &middot; Lerne Programmieren</title>
+  <title>Lerne Programmieren</title>
 
   
   <link type="text/css" rel="stylesheet" href="https://fgutmann.github.io/lerne-programmieren/css/print.css" media="print">
@@ -23,7 +23,7 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="" rel="alternate" type="application/rss+xml" title="Lerne Programmieren" />
+  <link href="https://fgutmann.github.io/lerne-programmieren/index.xml" rel="alternate" type="application/rss+xml" title="Lerne Programmieren" />
 
   <style type="text/css">
     .sidebar-about h1 {
@@ -65,26 +65,34 @@
 </aside>
 
     <main class="content container">
-    <div class="post">
-  <h1>TicTacToe - Lerne Programmieren</h1>
-  <time datetime=2018-12-28T11:33:38Z class="post-date">Fri, Dec 28, 2018</time>
+    <div class="posts">
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://fgutmann.github.io/lerne-programmieren/">TicTacToe - Lerne Programmieren</a>
+  </h1>
+  <time datetime="2018-12-28T11:33:38Z" class="post-date">Fri, Dec 28, 2018</time>
+  Hallo!
+Gratulation zur deiner Entscheidung programmieren zu lernen. Programmieren zu können gibt dir die Möglichkeit neue Dinge von Grund auf zu erschaffen und eröffnet dir eine völlig neue Welt der Möglichkeiten mit deinem Computer umzugehen.
+Egal ob du Spiele, Apps, Webseiten oder sonstige Anwendungen entwickeln willst, die Grundlagen dazu sind immer die gleichen. Es gibt zwar eine Vielzahl an verschiedenen Programmiersprachen doch im Grunde stecken nur einige wenige Konzepte dahinter die sich in all diesen Programmiersprachen wiederfinden.
   
+  <div class="read-more-link">
+    <a href="/lerne-programmieren/">Read More…</a>
+  </div>
+  
+</article>
+</div>
+    </main>
 
-<script src="https://unpkg.com/kotlin-playground@1" data-selector=".language-kotlin"></script>
-
-<p>Hallo!</p>
-
-<p>Gratulation zur deiner Entscheidung programmieren zu lernen. Programmieren zu können gibt dir die Möglichkeit neue Dinge von Grund auf zu erschaffen und eröffnet dir eine völlig neue Welt der Möglichkeiten mit deinem Computer umzugehen.</p>
-
-<p>Egal ob du Spiele, Apps, Webseiten oder sonstige Anwendungen entwickeln willst, die Grundlagen dazu sind immer die gleichen. Es gibt zwar eine Vielzahl an verschiedenen Programmiersprachen doch im Grunde stecken nur einige wenige Konzepte dahinter die sich in all diesen Programmiersprachen wiederfinden. Wir konzentrieren uns in diesem Kurs darauf diese Konzepte auf einfache, anschauliche und interaktive Art und Weise zu vermitteln.</p>
-
-<p>Natürlich wollen wir das ganze praktisch greifbar machen und auch Ergebnisse sehen. Als erstes werden wir daher den Spiele-Klassiker TicTacToe entwickeln. Wir werden anhand dieses Beispiels die ersten Grundlagen des Programmierens erlernen und ein komplett funktionstüchtiges Spiel entwickeln.</p>
+    
+  </body>
+</html>
+anze praktisch greifbar machen und auch Ergebnisse sehen. Als erstes werden wir daher den Spiele-Klassiker TicTacToe entwickeln. Wir werden anhand dieses Beispiels die ersten Grundlagen des Programmierens erlernen und ein komplett funktionstüchtiges Spiel entwickeln.</p>
 
 <pre
     class="language-kotlin" data-target-platform="canvas"
     data-output-height="370"
     
-    folded-button="false"
+    
 >
     
 <textarea class="hidden-dependency">
@@ -130,7 +138,7 @@ val TIE = 2
 
 var field = Array(9) { "_" }
 var gameStatus = PLAYING
-var currentPlayer = "X"
+var currentPlayer = "x"
 var move = 0
 
 fun drawField() {
@@ -180,7 +188,7 @@ fun drawStone(num : Int, player : String) {
     context2d.beginPath()
     context2d.lineWidth = 2.0
 
-    if (player == "X") {
+    if (player == "x") {
         context2d.moveTo(0.0, 0.0)
         context2d.lineTo(10.0, 10.0)
         context2d.moveTo(0.0, 10.0)
@@ -240,7 +248,7 @@ fun setStone(num : Int) {
     } else if (move == 9) {
         gameStatus = TIE
     } else {
-        currentPlayer = if (currentPlayer == "X") "O" else "X"
+        currentPlayer = if (currentPlayer == "x") "o" else "x"
     }
 
     updateStatus()
@@ -249,7 +257,7 @@ fun setStone(num : Int) {
 fun reset() {
     field = Array(9) { "_" }
     gameStatus = PLAYING
-    currentPlayer = "X"
+    currentPlayer = "x"
     move = 0
     context2d.clearRect(0.0, 0.0, 300.0, 350.0)
     drawField()
@@ -653,7 +661,7 @@ fun main() {
 
 <p>Wir haben Kommentare eingefügt die beschreiben was geschieht. Alle Zeilen die mit zwei Schrägstrichen <code>//</code> beginnen werden von Kotlin ignoriert. Diese sind nur für Menschen gedacht. Du kannst dir selbst so viele Kommentare setzten wie du möchtest. Kommentare sind ein wichtiges Werkzeug um den Code zu dokumentieren. So kennst du dich selbst gleich wieder aus, auch wenn du nach einigen Monaten erst wieder zu dem Code zurückkehrst und auch andere Entwickler können mit guten Kommentaren deinen Code viel schneller verstehen.</p>
 
-<p><strong>Gratulation!</strong> Du hast den ersten Schritt unseres Spiels erfolgreich programmiert! Das Spielfeld ist erfolgreich dargestellt. Im nächsten Abschnitt werden wir lernen unsere X und O Spielsteine zu zeichnen.</p>
+<p><strong>Gratulation!</strong> Du hast den ersten Schritt unseres Spiels erfolgreich programmiert! Das Spielfeld ist erfolgreich dargestellt. Im nächsten Abschnitt werden wir lernen unsere x und O Spielsteine zu zeichnen.</p>
 
 <h2 id="funktionen">Funktionen</h2>
 
@@ -941,7 +949,165 @@ fun drawField() {
 
 </pre>
 
-<!-- ## Setzen der Spielsteine -->
+<h2 id="setzen-der-spielsteine">Setzen der Spielsteine</h2>
+
+<p>Nachdem wir so viel über Funktionen gelernt haben wird es Zeit wieder zu unserem TicTacToe Spiel zurück zu kehren. Den ersten Punkt unseres groben Plans, das Spielfeld zu zeichnen, haben wir schon erledigt. Als nächsten Schritt wollen wir bei einem Klick auf das Spielfeld an diese Stelle den Stein des aktuellen Spielers setzen (X oder O).</p>
+
+<p>Um den Code übersichtlich zu halten werden wir zuerst eine Funktion schreiben die einen Spielstein auf das Feld zeichnet. Als Name für die Funktion ist <code>drawStone</code>, also übersetzt &ldquo;zeichne Stein&rdquo; ganz gut geeignet. Es ist ein sehr einfacher, kurzer Name der gut beschreibt was die Funktion tut.</p>
+
+<blockquote>
+<p>Das Finden von guten Namen ist beim Programmieren eine der wichtigsten und eine der schwersten Aufgaben zugleich. Wenn dein Programm aus logischen, einfachen Wörtern besteht wirst du dich auch später wieder schnell im Code zurecht finden. Wenn du aber keine guten Namen findest und zum Beispiel als Namen für deine Funktionen <code>abrakadabra</code> und <code>hokuspokus</code> verwendest, wird dein Programm zwar auch funktionieren aber du wirst sehr schnell den Überblick verlieren und es wird dir schwer fallen komplexere Dinge zu programmieren.</p>
+</blockquote>
+
+<p>Was muss unsere Funktion <code>drawStone</code> wissen um ihre Arbeit erfolgreich zu verrichten?</p>
+
+<ol>
+<li>Sie muss wissen in welches Kästchen des Spielfelds der Spielstein gesetzt werden soll.</li>
+<li>Außerdem muss die Funktion wissen welches Symbol gesetzt werden soll. Entweder ein X oder ein O.</li>
+</ol>
+
+<p>Diese Informationen werden wir der Funktion <code>drawStone</code> als zwei Parameter übergeben.</p>
+
+<p>Parameter einer Funktion bestehen aus einem Namen und einem Datentyp (englisch &ldquo;type&rdquo;). Der Name wird verwendet um im Code auf den übergebenen Wert zuzugreifen. Der Datentyp gibt an welche Art von Wert an die Funktion übergeben wird. Das kann zum Beispiel eine Zahl oder ein Text sein. Bei Zahlen wird noch weiter unterschieden ob es sich um eine Ganzzahl oder eine Komma-Zahl handelt. Es gibt noch einige weitere Datentypen über die wir erst später sprechen werden. Hier einmal die wichtigsten die wir für unser Spiel benötigen.</p>
+
+<table>
+<thead>
+<tr>
+<th>Name in Kotlin</th>
+<th>Beschreibung</th>
+<th>Beispiele</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Int</td>
+<td>Ganzzahl</td>
+<td><code>1</code>, <code>1002</code>, <code>-494</code></td>
+</tr>
+
+<tr>
+<td>Double</td>
+<td>Komma-Zahl</td>
+<td><code>1.3</code>, <code>10.0</code>, <code>-4596.328494</code></td>
+</tr>
+
+<tr>
+<td>String</td>
+<td>Text</td>
+<td><code>&quot;Hallo&quot;</code>, <code>&quot;Ein langer Satz&quot;</code> <code>&quot;X&quot;</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>Diese Datentypen heißen in sehr vielen Programmiersprachen genau so. &ldquo;Int&rdquo; wird jedoch in manchen Programmiersprachen als &ldquo;Integer&rdquo; ausgeschrieben. Wenn du einen String, also einen Text, im Code schreibst darfst du nicht darauf vergessen diesen unter doppelte Anführungszeichen zu setzten.</p>
+
+<p>Wir werden unserer <code>drawStone</code> Funktion als ersten Parameter eine Zahl von <code>0</code> bis <code>8</code> übergeben die angibt in welches Kästchen der Spielstein gezeichnet werden soll. Da es sich dabei um ganze Zahlen handelt hat der erste Parameter den Datentyp <code>Int</code>. Dabei nummerieren wir die Spielfelder von links oben nach rechts unten durch. Hier eine Illustration wie die einzelnen Felder in unserem Spielfeld nummeriert sind.</p>
+
+<pre><code>         |         |
+    0    |    1    |    2
+         |         |
+-----------------------------
+         |         |
+    3    |    4    |    5
+         |         |
+-----------------------------
+         |         |
+    6    |    7    |    8
+         |         |
+</code></pre>
+
+<p>Als zweiten Parameter übergeben wir der Funktion als String (also Text) welches Symbol gezeichnet werden soll. Wenn wir <code>&quot;x&quot;</code> übergeben, soll die Funktion ein <code>x</code> Symbol zeichnen.  Wenn wir ein <code>&quot;o&quot;</code> übergeben, soll die Funktion das <code>o</code> Symbol zeichnen.</p>
+
+<p>Wenn wir unsere Funktion <code>drawStone</code> mit dem Codestück <code>drawStone(4, &quot;x&quot;)</code> aufrufen, soll die Funktion also in das mittlere Kästchen ein <code>x</code> zeichnen.<br />
+Bei <code>drawStone(0, &quot;o&quot;)</code> ein <code>o</code> in das links obere Feld.</p>
+
+<blockquote>
+<p>In der Programmierung ist es üblich, wenn Dingen eine Nummer zugewiesen wird, dass bei <code>0</code> anstatt bei <code>1</code> begonnen wird. Die Gründe dafür liegen weit zurück in der Geschichte der Programmierung. In den meisten Programmiersprachen hat sich diese Praxis bis heute gehalten. Daher schließen wir uns dem an und versuchen uns von Anfang an daran zu gewöhnen.</p>
+</blockquote>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    
+>
+    
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+fun drawField() {
+    context2d.beginPath()
+    
+    // 1. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 100.0)
+    context2d.lineTo(300.0, 100.0)
+    
+    // 2. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 200.0)
+    context2d.lineTo(300.0, 200.0)
+    
+    // 1. vertikale Linie von oben nach unten
+    context2d.moveTo(100.0, 0.0)
+    context2d.lineTo(100.0, 300.0)
+    
+    // 2. vertikale Linie von oben nach unten
+    context2d.moveTo(200.0, 0.0)
+    context2d.lineTo(200.0, 300.0)
+    
+    context2d.stroke()
+}
+
+//sampleStart
+fun drawStone(fieldNum : Int, symbol : String) {
+    // Hier kommt der Code zum Zeichnen des Symbols hin.
+}
+
+fun main() {
+    drawField()
+    drawStone(0, "x")
+    drawStone(1, "o")
+    drawStone(5, "x")
+}
+//sampleEnd
+
+</pre>
+
+<p>Im Code oben haben wir die Funktion <code>drawStone</code> definiert. Wir beginnen wie bei allen Funktionsdefinitionen mit dem Wort <code>fun</code>. Danach kommt der Name der Funktion, also <code>drawStone</code>. Dahinter geht die Klammer auf und die Liste der Parameter beginnt. Diesmal haben wir 2 Parameter. Zuerst kommt der Name des ersten Parameters. In diesem Fall <code>fieldNum</code>, eine Abkürzung für &ldquo;field number&rdquo;, zu Deutsch also &ldquo;Feldnummer&rdquo;. Hinter dem Namen kommt ein Doppelpunkt <code>:</code> und danach der Datentyp. Da wir als Feldnummer eine Zahl von 0 bis 8 übergeben ist es <code>Int</code>. Danach kommt ein Komma um zu zeigen, dass ein weiterer Parameter folgt. Dieser hat den Namen <code>symbol</code>, also Symbol. Der Datentyp folgt wieder nach dem Doppelpunkt. Da wir hier entweder <code>&quot;x&quot;</code> oder <code>&quot;o&quot;</code>, also einen Text, übergeben ist er <code>String</code>.</p>
+
+<blockquote>
+<p>Wir übergeben als Text an unsere Funktion <code>&quot;x&quot;</code> und <code>&quot;o&quot;</code>, also eigentlich nur einen einzigen Buchstaben. Trotzdem ist unser Datentyp <code>String</code>. Ein String kann ein beliebig langer oder kurzer Text sein. Ein Buchstabe ist dabei völlig ausreichend. Selbst Text mit keinem einzigen Buchstaben ist grundsätzlich erlaubt und wird als <code>&quot;&quot;</code> geschrieben. In der Fachsprache heißt dieser Spezielle Text, der keinen einzigen Buchstaben enthält &ldquo;empty string&rdquo;, zu deutsch also &ldquo;leerer Text&rdquo;.</p>
+</blockquote>
 
 </div>
 
