@@ -80,7 +80,13 @@
 
 <p>Natürlich wollen wir das ganze praktisch greifbar machen und auch Ergebnisse sehen. Als erstes werden wir daher den Spiele-Klassiker TicTacToe entwickeln. Wir werden anhand dieses Beispiels die ersten Grundlagen des Programmierens erlernen und ein komplett funktionstüchtiges Spiel entwickeln.</p>
 
-<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    folded-button="false"
+>
+    
 <textarea class="hidden-dependency">
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
@@ -273,6 +279,7 @@ fun main() {
     startGame()
 //sampleEnd
 }
+
 </pre>
 
 <p>Starte das Spiel indem du im Code-Block oben auf den grünen Start-Knopf auf der rechten Seite klickst. Spiele einige male um ein Gefühl für das Spiel zu bekommen. Am Ende der Runde, kannst du es mit einem Klick irgendwo auf das Spielfeld erneut starten.</p>
@@ -383,7 +390,13 @@ Verschiedene Sprachen haben verschiedene Hintergründe und sind oft für einen b
 
 <p>Unser canvas hat eine Breite von <code>300</code> und eine Höhe von <code>350</code>. Mittels <code>context2d</code> können wir in 2D auf unserem canvas zeichnen. Hier der Programmcode um eine Line von links oben nach rechts unten zu zeichnen.</p>
 
-<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    folded-button="false"
+>
+    
 <textarea class="hidden-dependency">
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
@@ -425,6 +438,7 @@ fun main() {
     context2d.stroke()
 //sampleEnd
 }
+
 </pre>
 
 <p>In der ersten Zeile sagen wir unserer 2D Zeichenumgebung, dass wir einen neuen Pfad beginnen. Wir nehmen also praktisch unsere Füllfeder in die Hand.</p>
@@ -454,7 +468,13 @@ Los gehts, versuche dich darin! Probier es aus :-)</p>
 
 <p>…</p>
 
-<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    folded-button="false"
+>
+    
 <textarea class="hidden-dependency">
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
@@ -498,13 +518,20 @@ fun main() {
     context2d.stroke()
 //sampleEnd
 }
+
 </pre>
 
 <p>Mit deinem neuen Wissen hast du alles was du benötigst um das Tic-Tac-Toe Spielfeld zu zeichnen. Es sind einfach zwei horizontale und 2 vertikale Linien. Wir zeichnen unser Spielfeld auf einer Größe von <code>300 x 300</code>. Somit müssen wir im Abstand von <code>100</code> jeweils unsere Linien zeichnen. Die unteren <code>50</code> Einheiten halten wir uns für den Statustext der anzeigt welcher Spieler gerade an der Reihe ist frei.</p>
 
 <p>Los geht&rsquo;s!</p>
 
-<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    folded-button="false"
+>
+    
 <textarea class="hidden-dependency">
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
@@ -547,13 +574,20 @@ fun main() {
     context2d.stroke()
 //sampleEnd
 }
+
 </pre>
 
 <p>Geschafft?</p>
 
 <p>Ich zeige dir hier meine Lösung. Es gibt aber auch viele andere richtige Varianten. Zum Beispiel spielt es keine Rolle in welcher Reihenfolge oder Richtung wir die einzelnen Linien Zeichnen.</p>
 
-<pre class="language-kotlin" data-target-platform="canvas" data-output-height="370" folded-button="false">
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    folded-button="false"
+>
+    
 <textarea class="hidden-dependency">
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
@@ -610,6 +644,7 @@ fun main() {
     context2d.stroke()
 //sampleEnd
 }
+
 </pre>
 
 <p>In dieser Lösung sind noch zwei neue Dinge, die wir bisher noch nicht gesehen haben.</p>
@@ -619,6 +654,294 @@ fun main() {
 <p>Wir haben Kommentare eingefügt die beschreiben was geschieht. Alle Zeilen die mit zwei Schrägstrichen <code>//</code> beginnen werden von Kotlin ignoriert. Diese sind nur für Menschen gedacht. Du kannst dir selbst so viele Kommentare setzten wie du möchtest. Kommentare sind ein wichtiges Werkzeug um den Code zu dokumentieren. So kennst du dich selbst gleich wieder aus, auch wenn du nach einigen Monaten erst wieder zu dem Code zurückkehrst und auch andere Entwickler können mit guten Kommentaren deinen Code viel schneller verstehen.</p>
 
 <p><strong>Gratulation!</strong> Du hast den ersten Schritt unseres Spiels erfolgreich programmiert! Das Spielfeld ist erfolgreich dargestellt. Im nächsten Abschnitt werden wir lernen unsere X und O Spielsteine zu zeichnen.</p>
+
+<h2 id="funktionen">Funktionen</h2>
+
+<p>Bevor wir damit beginnen die Spielsteine in der Form von X und O auf unserem Feld zu platzieren, widmen wir uns noch dem Thema Funktionen. Eine Funktion in der Programmierung ist ein Stück zusammengehöriger Programmcode der auf einmal ausgeführt wird. Diese Codeblöcke können dann von anderen Stellen im Code aufgerufen werden. Wir verwenden Funktionen zum Strukturieren unseres Programms.</p>
+
+<p>Funktionen können keine, einen oder mehrere Werte als Eingabe haben. Das sind die sogenannten Parameter. Mit diesen Parametern kann die Funktion Informationen erhalten die sie benötigt um ihre Arbeit zu verrichten.</p>
+
+<p>Zusätzlich kann eine Funktion auch einen Wert an den Code der die Funktion aufruft zurückliefern. Das ist der sogenannte return Wert. Nicht alle Funktionen geben einen Wert zurück.</p>
+
+<h3 id="funktionsaufrufe">Funktionsaufrufe</h3>
+
+<p>Du hast beim Zeichnen der Linien bereits mehrere Funktionen kennen gelernt und aufgerufen. Der Code <code>context2d.beginPath()</code> ruft die Funktion <code>beginPath</code> des Objekts <code>context2d</code> auf. Der Code <code>context2d.moveTo(0.0, 200.0)</code> ruft die Funktion <code>moveTo</code> des Objekts <code>context2d</code> auf und übergibt 2 Parameter, die Zahlen <code>0.0</code> und <code>200.0</code> an die Funktion.</p>
+
+<p>In Kotlin, sowie auch vielen anderen Programmiersprachen, wird ein Funktionsaufruf im allgemeinen so geschrieben.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    
+    data-highlight-only
+    folded-button="false"
+>
+    
+objekt.nameDerFunktion(parameter1, parameter2)
+  1   2      3        4     5    5     5     6
+
+</pre>
+
+<ol>
+<li>Zuerst kommt der Name des Objekts zu dem die Funktion gehört. Dieser Teil ist nicht immer vorhanden, weil nicht jede Funktion zu einem Objekt gehört.</li>
+<li>Durch einen Punkt wird dar Name des Objekts vom Namen der Funktion getrennt. Gehört die Funktion nicht zu einem Objekt, entfällt auch dieser Teil.</li>
+<li>Danach kommt der Name der Funktion.</li>
+<li>Eine runde Klammer auf <code>(</code> beendet den Funktionsnamen und beginnt die Liste der Parameter.</li>
+<li>Es folgen die Parameter die an die Funktion übergeben werden. Mehrere Parameter sind durch ein Komma getrennt. Es kann auch sein, dass keine Parameter vorhanden sind.</li>
+<li>Eine runde Klammer zu <code>)</code> beendet den Funktionsaufruf.</li>
+</ol>
+
+<p>Hier zwei Beispiele die wir schon oben gesehen haben:</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    
+    data-highlight-only
+    folded-button="false"
+>
+    
+context2d.stroke()
+
+</pre>
+
+<p>Dieser Code ruft die Funktion mit dem Namen <code>stroke</code> des Objekts <code>context2d</code> auf. Die Funktion <code>stroke</code> hat keine Parameter, daher kommt die Klammer zu <code>)</code> direkt nach der öffnenden Klammer.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    
+    data-highlight-only
+    folded-button="false"
+>
+    
+context2d.lineTo(300.0, 100.0)
+
+</pre>
+
+<p>Dieser Code ruft die Funktion mit dem Namen <code>lineTo</code> des Objekts <code>context2d</code> auf. Diese Funktion hat 2 Parameter die sie benötigt um zu wissen wo das Ende der Linie sein soll. Der erste Parameter ist der Wert <code>300.0</code>. Der zweite Parameter folgt mit einem Komma getrennt und hat den Wert <code>100.0</code>. Auf diese Weise haben wir der Funktion <code>lineTo</code> mitgeteilt auf welchen Koordinaten das Ende der Linie sein soll.</p>
+
+<p>Und hier noch ein neues Beispiel einer Funktion die wir bisher noch nicht kennen gelernt haben. Dieser Code ist übrigens wieder ausführbar.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="0"
+    
+    folded-button="false"
+>
+    
+fun main() {
+//sampleStart
+println("Hello World!")
+//sampleEnd
+}
+
+</pre>
+
+<p>Hier rufen wir eine Funktion mit dem Namen <code>println</code> auf. Da diese zu keinem Objekt gehört entfällt der Name des Objekts und der zugehörige Punkt. Der Funktion wird ein Parameter übergeben und zwar der Text <code>Hello World!</code>. Texte werden in Kotlin unter doppelte Anführungszeichen gesetzt.</p>
+
+<p><code>println</code> ist eine Abkürzung die für &ldquo;print line&rdquo; steht was wörtlich auf Deutsch mit &ldquo;drucke zeile&rdquo; übersetzt werden kann. Praktisch bedeutet es aber &ldquo;gib eine Zeile Text aus&rdquo; und hat mit echten Druckern nichts zu tun. Wo genau die Zeile ausgegeben wird hängt von der Umgebung in der das Programm ausgeführt wird aus. In unserem Fall wird es unter dem Eingabefeld am Bildschirm angezeigt.</p>
+
+<h3 id="funktionsdefinitionen">Funktionsdefinitionen</h3>
+
+<p>Alle Funktionen die wir bisher aufgerufen haben, wie zum Beispiel <code>println</code> oder die Funktion <code>stroke</code> des Objekts <code>context2d</code>, sind in der Programmiersprache Kotlin bereits vorhanden. Wir können aber auch unsere eigenen Funktionen erstellen und so unseren Code strukturieren.</p>
+
+<p>Zum Beispiel ist es sinnvoll den Code der unser Spielfeld zeichnet in eine eigene Funktion namens <code>drawField</code> zu verpacken. Das ermöglicht uns, dass wir von überall in unserem Code diese Funktion mit dem einfachen Stück Code <code>drawField()</code> aufrufen können und das Spielfeld wird gezeichnet. Dabei müssen wir beim Schreiben des Funktionsaufrufs nicht mehr über all die Details wie <code>beginPath</code>, <code>moveTo</code> und <code>lineTo</code> nachdenken. All diese Details sind in unserer Funktion <code>drawField</code> versteckt.</p>
+
+<p>Die Definition einer Funktion ohne Parameter und ohne Rückgabewert (Englisch &ldquo;return value&rdquo;) sieht in Kotlin so aus:</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    
+    data-highlight-only
+    folded-button="false"
+>
+    
+fun nameDerFunktion() {
+    // code der Funktion
+}
+
+</pre>
+
+<p>Das Wort <code>fun</code> ist eine Abkürzung für das Wort &ldquo;function&rdquo; was übersetzt &ldquo;Funktion&rdquo; bedeutet. Danach kommt der Name der Funktion, gefolgt von Klammer auf und gleich wieder zu <code>()</code>. Hätte unsere Funktion Parameter würden wir diese zwischen den Klammern definieren.</p>
+
+<p>Als nächstes folgt eine geschwungene Klammer auf <code>{</code> die den Beginn des Codes der Funktion markiert. Am Ende haben wir eine geschwungene Klammer zu <code>}</code> die das Ende des Codes der Funktion markiert. Zwischen den geschwungenen Klammern steht also der Code unserer Funktion. Im Englischen heißt dieser Teil der Funktion &ldquo;function body&rdquo; oder auch einfach nur &ldquo;body&rdquo;. Auf Deutsch könnte man es wohl mit &ldquo;Funktionskörper&rdquo; übersetzen.</p>
+
+<blockquote>
+<p>Wir werden Fachbegriffe wie &ldquo;function body&rdquo;, &ldquo;parameter&rdquo;, &ldquo;return value&rdquo; und dergleichen immer mehr auf Englisch verwenden, da diese in der Praxis so viel geläufiger sind. Diese Wörter kommen oft auch in der Programmiersprache selbst vor und sind dort immer in Englisch. Daher gibt es praktisch keinen Weg daran vorbei diese Wörter auf Englisch zu verstehen. Meist ist es nicht mal notwendig das Wort überhaupt auf Deutsch zu kennen da es sich hier um Fachbegriffe handelt die einfach immer auf Englisch verwendet werden. Das Wort &ldquo;Funktionskörper&rdquo; zum Beispiel habe ich bisher in der Praxis in über 15 Jahren noch nie gehört :-) Es ist einfach der &ldquo;function body&rdquo; oder &ldquo;body of the function&rdquo;.</p>
+</blockquote>
+
+<p>Unsere Funktion für das Zeichnen des Felds sieht fertig so aus:</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    folded-button="false"
+>
+    
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+fun drawField() {
+    context2d.beginPath()
+    
+    // 1. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 100.0)
+    context2d.lineTo(300.0, 100.0)
+    
+    // 2. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 200.0)
+    context2d.lineTo(300.0, 200.0)
+    
+    // 1. vertikale Linie von oben nach unten
+    context2d.moveTo(100.0, 0.0)
+    context2d.lineTo(100.0, 300.0)
+    
+    // 2. vertikale Linie von oben nach unten
+    context2d.moveTo(200.0, 0.0)
+    context2d.lineTo(200.0, 300.0)
+    
+    context2d.stroke()
+}
+
+</pre>
+
+<p>Wir haben einfach den Code der das Spielfeld zeichnet von weiter oben als unseren function body verwendet und der Funktion den Namen <code>drawField</code> gegeben. Da unsere Funktion keine Parameter hat, steht in den Klammern hinter dem Namen der Funktion nichts.</p>
+
+<p>Den Code in der Funktion haben wir mit jeweils 4 Leerzeichen vom linken Rand eingerückt. Diese Einrückung lässt uns sofort erkennen wo die Funktion startet und wo sie endet. Für Kotlin macht es keinen Unterschied ob wir diese Einrückung machen oder nicht, für uns Menschen aber schon.</p>
+
+<p>Wenn du den Code von oben ausführst passiert nichts, weil wir nur die Funktion definiert, aber nie aufgerufen haben.</p>
+
+<blockquote>
+<p>Um die Einrückung von oben vorzunehmen musst du nicht vor jeder einzelnen Zeile manuell 4 Leerzeichen tippen. Du kannst einfach alle Zeilen die du einrücken möchtest mit der Maus markieren und danach die Tabulator Taste, die auch oft nur Tab-Taste genannt wird, drücken. Diese findest du auf deiner Tastatur zwei Tasten über der Großschreibtaste. Das Symbol darauf ist auf den meisten Tastaturen ein oder zwei Pfeile die nach rechts bzw links zeigen. Zum Einrücken einer einzelnen Zeile kannst du einfach den Cursor auf den Anfang der Zeile setzen und einmal die Tab-Taste drücken. Um Code wieder nach links zu rücken einfach die Großschreibtaste halten und zugleich die Tab-Taste drücken.</p>
+
+<p>Die Symbole für die geschwungenen Klammern <code>{}</code> sind nicht immer auf die Tastatur gedruckt und daher manchmal schwer zu finden. Diese sind zudem auf Mac-Tastaturen wo anders zu finden als auf PC-Tastaturen. PC Benutzer können diese über die Tastenkombination <code>Alt Gr + 7</code> und <code>Alt Gr + 0</code> tippen. Mac Benutzer erreichen diese über die Kombination <code>Cmd + 8</code> und <code>Cmd + 9</code>.</p>
+</blockquote>
+
+<h3 id="die-main-funktion">Die Main Funktion</h3>
+
+<p>Bisher hast du, wenn du Code ausführen wolltest, diesen einfach hingeschrieben und auf den Start-Knopf gedrückt. Wir haben dir dabei aber ein Detail verschwiegen. Wir haben etwas Code der für das Ausführen des Programms notwendig ist vor dir versteckt.</p>
+
+<p>Hier nochmals das &ldquo;Hello World!&rdquo; Beispiel von oben. Diesmal gibt es aber mit dem <code>+</code>, einen Knopf der dir den versteckten Code anzeigt.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="0"
+    
+    
+>
+    
+fun main() {
+//sampleStart
+    println("Hello World!")
+//sampleEnd
+}
+
+</pre>
+
+<p>Wenn du den versteckten Code sichtbar schaltest, siehst du dass wir eine Funktionsdefinition mit dem Namen <code>main</code> vor dir versteckt haben. Jeder Code den du bisher geschrieben hast, war eigentlich immer der function body der Funktion mit dem Namen <code>main</code>!</p>
+
+<p>In jedem Kotlin Programm wird beim Start des Programms damit begonnen den Code in der Funktion mit dem Namen <code>main</code> auszuführen. Diese Konvention ist in sehr vielen Programmiersprachen so. Die Funktion <code>main</code> wird aufgerufen wenn dein Programm startet. Schließlich muss der Computer ja irgendwo damit beginnen den Code auszuführen und woher sollte er wissen wo er beginnen muss wenn dein Programm 100 verschiedene Funktionen enthält?</p>
+
+<p>Unser Programm mit der <code>drawField</code> Funktion von oben hat nichts gemacht als wir es ausgeführt haben. Das liegt daran, dass es im Code keine <code>main</code> Funktion gibt bei der der Computer anfangen kann unseren Code auszuführen. Um unser Spielfeld zu sehen müssen wir also eine <code>main</code> Funktion hinzufügen die unsere <code>drawField</code> Funktion aufruft.</p>
+
+<p>Mit deinem neuen Wissen über Funktionen und den Beispielen von oben hast du alles Notwendige um die <code>main</code> Funktion im Code hinzuzufügen die unsere <code>drawField</code> Funktion aufruft. Wenn du alles richtig gemacht hast und den Code ausführst ist das Spielfeld wieder zu sehen.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    folded-button="false"
+>
+    
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+fun drawField() {
+    context2d.beginPath()
+    
+    // 1. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 100.0)
+    context2d.lineTo(300.0, 100.0)
+    
+    // 2. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 200.0)
+    context2d.lineTo(300.0, 200.0)
+    
+    // 1. vertikale Linie von oben nach unten
+    context2d.moveTo(100.0, 0.0)
+    context2d.lineTo(100.0, 300.0)
+    
+    // 2. vertikale Linie von oben nach unten
+    context2d.moveTo(200.0, 0.0)
+    context2d.lineTo(200.0, 300.0)
+    
+    context2d.stroke()
+}
+
+[mark]// Füge hier die main Funktion ein, die unsere drawField Funktion aufruft.[/mark]
+
+</pre>
+
+<!-- ## Setzen der Spielsteine -->
 
 </div>
 
