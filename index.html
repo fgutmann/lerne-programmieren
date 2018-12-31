@@ -153,6 +153,27 @@ fun drawField() {
     context2d.restore()
 }
 
+fun drawStone(fieldNum : Int, symbol : String) {
+    val row = fieldNum / 3
+    val column = fieldNum % 3
+
+    val x = column * 100.0 + 50.0
+    val y = row * 100.0 + 50.0
+
+    context2d.beginPath()
+
+    if (symbol == "o") {
+        context2d.arc(x, y, 10.0, 0.0, 2 * kotlin.math.PI)
+    } else {
+        context2d.moveTo(x - 10, y - 10)
+        context2d.lineTo(x + 10, y + 10)
+        context2d.moveTo(x - 10, y + 10)
+        context2d.lineTo(x + 10, y - 10)
+    }
+
+    context2d.stroke()
+}
+
 fun updateStatus() {
     val statusText = when (gameStatus) {
         PLAYING -> "Spieler $currentPlayer ist an der Reihe"
@@ -165,31 +186,6 @@ fun updateStatus() {
     context2d.save()
     context2d.clearRect(0.0, 300.0, 300.0, 50.0)
     context2d.fillText(statusText, (300 - textWidth) / 2, 325.0)
-    context2d.restore()
-}
-
-fun drawStone(num : Int, player : String) {
-    val row = num / 3
-    val column = num % 3
-
-    val top = row * 100.0 + 45.0
-    val left = column * 100.0 + 45.0
-
-    context2d.save()
-    context2d.translate(left, top)
-    context2d.beginPath()
-    context2d.lineWidth = 2.0
-
-    if (player == "x") {
-        context2d.moveTo(0.0, 0.0)
-        context2d.lineTo(10.0, 10.0)
-        context2d.moveTo(0.0, 10.0)
-        context2d.lineTo(10.0, 0.0)
-    } else {
-        context2d.arc(5.0, 5.0, 5.0, 0.0, 2 * PI)
-    }
-
-    context2d.stroke()
     context2d.restore()
 }
 
@@ -373,7 +369,7 @@ Verschiedene Sprachen haben verschiedene Hintergründe und sind oft für einen b
 
 <h2 id="das-spielfeld-canvas-und-seine-linien">Das Spielfeld - Canvas und seine Linien</h2>
 
-<p>Unser Spiel wird ein Browser basiertes Spiel. Als <code>Browser</code> oder auch <code>Web-Browser</code> bezeichnet man das Programm mit dem man im Internet surft. Es gibt viele verschiedene Browser wie zum Beispiel Mozilla Firefox, Google Chrome, Safari oder Opera.</p>
+<p>Unser Spiel wird ein Browser basiertes Spiel. Als <code>Browser</code> oder auch <code>Web-Browser</code> bezeichnet man das Programm mit dem man im Internet surft. Es gibt viele verschiedene Browser wie zum Beispiel Mozilla Firefox, Internet Explorer, Google Chrome, Safari oder Opera.</p>
 
 <p>Auch wenn diese Browser-Programme alle unterschiedlich heißen und von unterschiedlichen Herstellern sind, bieten sie für Programmierer eine einheitliche Schnittstelle wie Code ausgeführt werden kann. Das bedeutet dass du dein fertiges Spiel in jede beliebige Webseite einbinden kannst. Ohne dass der Benutzer eine extra App oder ein Programm herunterladen muss, kann er direkt in seinem Browser dein Spiel spielen. Egal ob er am Android-Handy, Laptop, Mac, oder Windows PC unterwegs ist, Firefox, Safari, Chrome oder einen anderen Browser verwendet, dein Spiel sieht immer gleich aus und funktioniert auch immer gleich.</p>
 
@@ -455,7 +451,7 @@ fun main() {
 <p>Viele Code-Blöcke in diesem Kurs sind bearbeitbar und können ausgeführt werden. Du bist herzlich eingeladen mit jedem einzelnen dieser Blöcke zu spielen. Je mehr du mit dem Code experimentierst und verschiedene Dinge ausprobierst, desto schneller wirst du verstehen was passiert. Keine Angst, du kannst nichts kaputt machen :-) Wenn du diese Seite neu lädst werden alle Code-Felder zurückgesetzt.</p>
 </blockquote>
 
-<p>Schaffst du es den Code von oben so zu bearbeiten, dass wir eine zweite Line von links unten nach rechts oben erhalten?
+<p>Schaffst du es den Code von oben so zu bearbeiten, dass wir eine zusätzliche Line von links unten nach rechts oben erhalten?
 Los gehts, versuche dich darin! Probier es aus :-)</p>
 
 <p>…</p>
@@ -653,11 +649,13 @@ fun main() {
 
 <p>Wir haben Kommentare eingefügt die beschreiben was geschieht. Alle Zeilen die mit zwei Schrägstrichen <code>//</code> beginnen werden von Kotlin ignoriert. Diese sind nur für Menschen gedacht. Du kannst dir selbst so viele Kommentare setzten wie du möchtest. Kommentare sind ein wichtiges Werkzeug um den Code zu dokumentieren. So kennst du dich selbst gleich wieder aus, auch wenn du nach einigen Monaten erst wieder zu dem Code zurückkehrst und auch andere Entwickler können mit guten Kommentaren deinen Code viel schneller verstehen.</p>
 
-<p><strong>Gratulation!</strong> Du hast den ersten Schritt unseres Spiels erfolgreich programmiert! Das Spielfeld ist erfolgreich dargestellt. Im nächsten Abschnitt werden wir lernen unsere x und O Spielsteine zu zeichnen.</p>
+<p><strong>Gratulation!</strong> Du hast den ersten Schritt unseres Spiels erfolgreich programmiert! Das Spielfeld ist erfolgreich dargestellt.</p>
 
 <h2 id="funktionen">Funktionen</h2>
 
-<p>Bevor wir damit beginnen die Spielsteine in der Form von X und O auf unserem Feld zu platzieren, widmen wir uns noch dem Thema Funktionen. Eine Funktion in der Programmierung ist ein Stück zusammengehöriger Programmcode der auf einmal ausgeführt wird. Diese Codeblöcke können dann von anderen Stellen im Code aufgerufen werden. Wir verwenden Funktionen zum Strukturieren unseres Programms.</p>
+<p>TODO: Warum sind funktionen cool? Beschreiben</p>
+
+<p>Bevor wir damit beginnen die Spielsteine in der Form von X und O auf unserem Feld zu platzieren, widmen wir uns noch kurz dem Thema Funktionen. Eine Funktion in der Programmierung ist ein Stück zusammengehöriger Programmcode der auf einmal ausgeführt wird. Diese Codeblöcke können dann von anderen Stellen im Code aufgerufen werden. Wir verwenden Funktionen zum Strukturieren unseres Programms.</p>
 
 <p>Funktionen können keine, einen oder mehrere Werte als Eingabe haben. Das sind die sogenannten Parameter. Mit diesen Parametern kann die Funktion Informationen erhalten die sie benötigt um ihre Arbeit zu verrichten.</p>
 
@@ -1090,6 +1088,8 @@ fun main() {
     drawStone(0, "x")
     drawStone(1, "o")
     drawStone(5, "x")
+    drawStone(6, "o")
+    drawStone(2, "x")
 }
 //sampleEnd
 
@@ -1098,8 +1098,277 @@ fun main() {
 <p>Im Code oben haben wir die Funktion <code>drawStone</code> definiert. Wir beginnen wie bei allen Funktionsdefinitionen mit dem Wort <code>fun</code>. Danach kommt der Name der Funktion, also <code>drawStone</code>. Dahinter geht die Klammer auf und die Liste der Parameter beginnt. Diesmal haben wir 2 Parameter. Zuerst kommt der Name des ersten Parameters. In diesem Fall <code>fieldNum</code>, eine Abkürzung für &ldquo;field number&rdquo;, zu Deutsch also &ldquo;Feldnummer&rdquo;. Hinter dem Namen kommt ein Doppelpunkt <code>:</code> und danach der Datentyp. Da wir als Feldnummer eine Zahl von 0 bis 8 übergeben ist es <code>Int</code>. Danach kommt ein Komma um zu zeigen, dass ein weiterer Parameter folgt. Dieser hat den Namen <code>symbol</code>, also Symbol. Der Datentyp folgt wieder nach dem Doppelpunkt. Da wir hier entweder <code>&quot;x&quot;</code> oder <code>&quot;o&quot;</code>, also einen Text, übergeben ist er <code>String</code>.</p>
 
 <blockquote>
-<p>Wir übergeben als Text an unsere Funktion <code>&quot;x&quot;</code> und <code>&quot;o&quot;</code>, also eigentlich nur einen einzigen Buchstaben. Trotzdem ist unser Datentyp <code>String</code>. Ein String kann ein beliebig langer oder kurzer Text sein. Ein Buchstabe ist dabei völlig ausreichend. Selbst Text mit keinem einzigen Buchstaben ist grundsätzlich erlaubt und wird als <code>&quot;&quot;</code> geschrieben. In der Fachsprache heißt dieser Spezielle Text, der keinen einzigen Buchstaben enthält &ldquo;empty string&rdquo;, zu deutsch also &ldquo;leerer Text&rdquo;.</p>
+<p>Wir übergeben als Text an unsere Funktion <code>&quot;x&quot;</code> und <code>&quot;o&quot;</code>, also eigentlich nur einen einzigen Buchstaben und keinen richtigen Text. Trotzdem ist unser Datentyp <code>String</code>. Ein String kann ein beliebig langer oder kurzer Text sein. Ein Buchstabe ist dabei völlig ausreichend. Selbst Text mit keinem einzigen Buchstaben ist grundsätzlich erlaubt und wird als <code>&quot;&quot;</code> geschrieben. In der Fachsprache heißt dieser Spezielle Text, der keinen einzigen Buchstaben enthält &ldquo;empty string&rdquo;, zu deutsch also &ldquo;leerer Text&rdquo;.</p>
 </blockquote>
+
+<p>Nachdem wir unsere Funktion definiert haben und wissen wie sie aufgerufen wird sind wir soweit den Code innerhalb der Funktion, also den function body zu schreiben.</p>
+
+<p>Zum Zeichnen des <code>x</code> Symbols können wir wieder wie beim Zeichnen des Spielfelds die <code>moveTo</code> und <code>lineTo</code> Funktionen vom <code>context2d</code> Objekt verwenden. Wir müssen nur 2 diagonale Linien zeichnen um das <code>x</code> Symbol zu erhalten.</p>
+
+<p>Zum Zeichnen des <code>o</code> Symbols gibt es eine Funktion am <code>context2d</code> Objekt welche einen Kreisbogen zeichnet. Ein Kreisbogen ist einfach ein Ausschnitt eines Kreises. Wenn du einen Zirkel verwendest und nur einen Teil des Kreises zeichnest, hast du einen Kreisbogen gezeichnet. Wenn du den Kreisbogen komplett fertig zeichnest, hast du einen Kreis.</p>
+
+<p>Die Funktion zum Zeichnen des Kreisbogens zeichnet einen Kreisbogen im Uhrzeigersinn und sieht so aus:</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    
+    data-highlight-only
+    folded-button="false"
+>
+    
+fun arc(x : Double, y: Double, radius: Double, startAngle: Double, endAngle: Double)
+
+</pre>
+
+<p>Der name &ldquo;arc&rdquo; ist dabei das Englische Wort für Kreisbogen. Dies sind die Parameter der Funktion:</p>
+
+<ul>
+<li><code>x</code>: Die x-Koordinate der Kreismitte auf dem canvas.</li>
+<li><code>y</code>: Die y-Koordinate der Kreismitte auf dem canvas.</li>
+<li><code>radius</code>: Der Radius des Kreises (wie weit der Zirkel geöffnet werden soll).</li>
+<li><code>startAngle</code>: Der Winkel in Radianten bei dem zu Zeichnen begonnen werden soll.</li>
+<li><code>endAngle</code>: Der Winkel in Radianten bei dem zu Zeichnen beendet wird.</li>
+</ul>
+
+<blockquote>
+<p>Radianten sind eine Darstellungsform für Winkel. 2 π in Radianten bedeutet der volle Kreis (360°). 1 π in Radianten wäre ein halber Kreis (180°). Da wir einen ganzen Kreis zeichnen wollen können wir einfach bei <code>startAngle</code> <code>0</code> beginnen und bis <code>endAngle</code> <code>2 π</code> zeichnen. Das Zeichen <code>π</code> (Pi) steht für die Mathematische Konstante für das Verhältnis von Kreisumfang zu Kreisdurchmesser. Der Wert von π ist ca. <code>3.14159</code>.</p>
+</blockquote>
+
+<p>In Kotlin können wir auf den Wert der Konstante π mittels <code>kotlin.math.PI</code> zugreifen. Um einen vollen Kreis an die Position <code>x:100, y:100</code> mit dem radius von <code>50</code> zu zeichnen rufen wir die Funktion so auf:</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    
+    data-highlight-only
+    folded-button="false"
+>
+    
+context2d.arc(100.0, 100.0, 50.0, 0.0, 2 * kotlin.math.PI)
+
+</pre>
+
+<p>Egal ob wir das <code>x</code> Symbol oder das <code>o</code> zeichnen wollen, müssen wir zuerst wissen an welche Stelle wir zeichnen wollen. Erinnern wir uns zurück an unsere Funktionsdefinition.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    
+    data-highlight-only
+    folded-button="false"
+>
+    
+fun drawStone(fieldNum : Int, symbol : String)
+
+</pre>
+
+<p>Wir bekommen als ersten Parameter die Feldnummer und müssen nun von dieser Nummer zu einer x / y position am Spielfeld kommen. Als erstes müssen wir wissen in welcher reihe und in welcher Spalte unser Spielstein positioniert werden soll. Rufen wir uns kurz die Feldnummerierung zurück ins Gedächtnis:</p>
+
+<pre><code>         |         |
+    0    |    1    |    2
+         |         |
+-----------------------------
+         |         |
+    3    |    4    |    5
+         |         |
+-----------------------------
+         |         |
+    6    |    7    |    8
+         |         |
+</code></pre>
+
+<p>In der ersten Reihe haben wir die Nummern 0, 1 und 2. In der zweiten Reihe 3, 4, 5 und in der dritten Reihe 6, 7 und 8. Wenn wir die Feldnummer durch 3 dividieren erhalten wir die Reihe. Wenn wir den Rest dieser Division nehmen erhalten wir die Spalte:</p>
+
+<pre><code>0 / 3 = 0 mal 0 rest
+1 / 3 = 0 mal 1 rest
+2 / 3 = 0 mal 2 rest
+3 / 3 = 1 mal 0 rest
+4 / 3 = 1 mal 1 rest
+5 / 3 = 1 mal 2 rest
+6 / 3 = 3 mal 0 rest
+7 / 3 = 3 mal 1 rest
+8 / 3 = 3 mal 2 rest
+</code></pre>
+
+<p>Um eine Zahl zu dividieren, schreiben wir einfach <code>zahl1 / zahl2</code> der Schrägstrich bedeutet dividieren. Wenn wir zwei <code>Int</code> Zahlen (Ganzzahlen) dividieren erhalten wir immer eine Ganzzahl. Der Rest wird einfach verworfen.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="0"
+    
+    folded-button="false"
+>
+    
+fun main() {
+    println(5 / 3)
+}
+
+</pre>
+
+<p>Dieses kleine Programm gibt <code>1</code> aus. Weil wir 2 Ganzzahlen dividieren wird der Rest der Division einfach verworfen und als Ergebnis bleibt <code>1</code>.</p>
+
+<p>Spiele mit einigen verschiedene Zahlen oben in dem Beispiel. Was passiert wenn du eine Komma-Zahl verwendest? Achte darauf, dass wir Komma-Zahlen mit einem Punkt und nicht mit einem Komma trennen. Also zum Beispiel <code>3.4</code> anstatt <code>3,4</code>. Diese Schreibweise kommt übrigens auch aus dem Englischen.</p>
+
+<p>Um den Rest einer Ganzzahl-Division zu bekommen können wir den so genannten &ldquo;modulo&rdquo; operator verwenden. Dieser ist einfach ein <code>%</code> Zeichen. Spiele dich ein bisschen mit der Modulo Division im unteren Code-Beispiel.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="0"
+    
+    folded-button="false"
+>
+    
+fun main() {
+    println(5 % 3)
+}
+
+</pre>
+
+<p>Um zur unserer Spalte und Reihe zu kommen können wir also folgenden Code verwenden:</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    
+    data-highlight-only
+    folded-button="false"
+>
+    
+var row = fieldNum / 3
+var column = fieldNum % 3
+
+</pre>
+
+<p>Wir dividieren in der ersten Zeile dividieren wir die Feldnummer durch 3. Da die Feldnummer in unserem Beispiel eine Ganzzahl ist und auch <code>3</code> eine Ganzzahl ist kommt immer eine Ganzzahl heraus. Der Rest der Division wird einfach verworfen. Das Ergebnis dieser Division speichern wir in der Variable mit dem Namen <code>row</code>.</p>
+
+<p>In der zweiten Zeile berechnen wir die Spalte, indem wir die Restwertdivision mit dem modulo operator ausführen. Das Ergebnis speichern wir in der Variable <code>column</code> zwischen.</p>
+
+<p>Nun können wir den Mittelpunkt des Kästchens berechnen. Unser Spielfeld ist 300 breit und 300 hoch. Jedes einzelne Kästchen ist also 100 breit und 100 hoch. Mit dieser Information können wir sehr einfach den Mittelpunkt berechnen. Ergänze im Code unten die Berechnung von <code>y</code>. Immer wenn in einem Code-Beispiel <code>TODO()</code> steht, ist es deine Aufgabe an dieser Stelle den Code zu ergänzen.</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="0"
+    
+    folded-button="false"
+>
+    
+fun main() {
+    drawStone(0, "x")
+    drawStone(1, "o")
+    drawStone(2, "x")
+    drawStone(5, "o")
+    drawStone(6, "x")
+}
+
+fun drawStone(fieldNum : Int, symbol : String) {
+    var row = fieldNum / 3
+    var column = fieldNum % 3
+
+    // Berechnung der x-Koordinate des Mittelpunkts des Kästchens
+    val x = column * 100.0 + 50.0
+    // Berechnung der y-Koordinate des Mittelpunkts des Kästchens
+    val y = [mark]TODO()[/mark]
+    
+    // Hier folgt später der Code zum Zeichnen des Symbols.
+    // Um zu sehen ob unsere Berechnung für den Mittelpunkt stimmt,
+    // geben wir aktuell einfach die berechneten Koordinaten aus.
+    println("fieldNum: ${fieldNum}, x: ${x}, y: ${y}")
+}
+
+</pre>
+
+<p>// TODO If anweisung von unten erklären</p>
+
+<pre
+    class="language-kotlin" data-target-platform="canvas"
+    data-output-height="370"
+    
+    
+>
+    
+<textarea class="hidden-dependency">
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
+import kotlin.browser.document
+import kotlin.dom.createElement
+
+fun setupCanvas(): HTMLCanvasElement {
+    val canvas = document.createElement("canvas") {
+        setAttribute("width", "600")
+        setAttribute("height", "700")
+    } as HTMLCanvasElement
+
+    canvas.style.width = "300px"
+    canvas.style.height = "350px"
+    canvas.style.margin = "10px 10px 0 10px"
+
+    document.body!!.append(canvas)
+
+    return canvas
+}
+
+fun setupRenderingContext(canvas : HTMLCanvasElement) : CanvasRenderingContext2D {
+    val context = canvas.getContext("2d") as CanvasRenderingContext2D
+    context.font = "14px Arial"
+    context.translate(0.5,0.5)
+    context.setTransform(2.0, 0.0, 0.0, 2.0, 0.0, 0.0)
+
+    return context
+}
+
+val canvas = setupCanvas()
+val context2d = setupRenderingContext(canvas)
+</textarea>
+fun drawField() {
+    context2d.beginPath()
+    
+    // 1. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 100.0)
+    context2d.lineTo(300.0, 100.0)
+    
+    // 2. horizontale Linie von links nach rechts
+    context2d.moveTo(0.0, 200.0)
+    context2d.lineTo(300.0, 200.0)
+    
+    // 1. vertikale Linie von oben nach unten
+    context2d.moveTo(100.0, 0.0)
+    context2d.lineTo(100.0, 300.0)
+    
+    // 2. vertikale Linie von oben nach unten
+    context2d.moveTo(200.0, 0.0)
+    context2d.lineTo(200.0, 300.0)
+    
+    context2d.stroke()
+}
+
+//sampleStart
+fun drawStone(fieldNum : Int, symbol : String) {
+    var row = fieldNum / 3
+    var column = fieldNum % 3
+    
+    var x = column * 100.0 + 50.0
+    var y = row * 100.0 + 50.0
+
+    context2d.beginPath()
+    
+    if (symbol == "o") {
+        context2d.arc(x, y, 10.0, 0.0, 2 * kotlin.math.PI)
+    } else {
+        // Füge hier deinen Code zum Zeichnen des x - Symbols ein
+        TODO()
+    }
+    
+    context2d.stroke()
+}
+//sampleEnd
+
+fun main() {
+    drawField()
+    drawStone(0, "x")
+    drawStone(1, "o")
+    drawStone(2, "x")
+    drawStone(5, "o")
+    drawStone(6, "x")
+}
+
+</pre>
 
 </div>
 
