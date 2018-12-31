@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>TicTacToe - Lerne Programmieren &middot; Lerne Programmieren</title>
+  <title>Lerne Programmieren</title>
 
   
   <link type="text/css" rel="stylesheet" href="https://fgutmann.github.io/lerne-programmieren/css/print.css" media="print">
@@ -23,7 +23,7 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="" rel="alternate" type="application/rss+xml" title="Lerne Programmieren" />
+  <link href="https://fgutmann.github.io/lerne-programmieren/index.xml" rel="alternate" type="application/rss+xml" title="Lerne Programmieren" />
 
   <style type="text/css">
     .sidebar-about h1 {
@@ -65,20 +65,28 @@
 </aside>
 
     <main class="content container">
-    <div class="post">
-  <h1>TicTacToe - Lerne Programmieren</h1>
-  <time datetime=2018-12-28T11:33:38Z class="post-date">Fri, Dec 28, 2018</time>
+    <div class="posts">
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://fgutmann.github.io/lerne-programmieren/">TicTacToe - Lerne Programmieren</a>
+  </h1>
+  <time datetime="2018-12-28T11:33:38Z" class="post-date">Fri, Dec 28, 2018</time>
+  Hallo!
+Gratulation zur deiner Entscheidung programmieren zu lernen. Programmieren zu können gibt dir die Möglichkeit neue Dinge von Grund auf zu erschaffen und eröffnet dir eine völlig neue Welt der Möglichkeiten mit deinem Computer umzugehen.
+Egal ob du Spiele, Apps, Webseiten oder sonstige Anwendungen entwickeln willst, die Grundlagen dazu sind immer die gleichen. Es gibt zwar eine Vielzahl an verschiedenen Programmiersprachen doch im Grunde stecken nur einige wenige Konzepte dahinter die sich in all diesen Programmiersprachen wiederfinden.
   
+  <div class="read-more-link">
+    <a href="/lerne-programmieren/">Read More…</a>
+  </div>
+  
+</article>
+</div>
+    </main>
 
-<script src="https://unpkg.com/kotlin-playground@1" data-selector=".language-kotlin"></script>
-
-<p>Hallo!</p>
-
-<p>Gratulation zur deiner Entscheidung programmieren zu lernen. Programmieren zu können gibt dir die Möglichkeit neue Dinge von Grund auf zu erschaffen und eröffnet dir eine völlig neue Welt der Möglichkeiten mit deinem Computer umzugehen.</p>
-
-<p>Egal ob du Spiele, Apps, Webseiten oder sonstige Anwendungen entwickeln willst, die Grundlagen dazu sind immer die gleichen. Es gibt zwar eine Vielzahl an verschiedenen Programmiersprachen doch im Grunde stecken nur einige wenige Konzepte dahinter die sich in all diesen Programmiersprachen wiederfinden. Wir konzentrieren uns in diesem Kurs darauf diese Konzepte auf einfache, anschauliche und interaktive Art und Weise zu vermitteln.</p>
-
-<p>Natürlich wollen wir das ganze praktisch greifbar machen und auch Ergebnisse sehen. Als erstes werden wir daher den Spiele-Klassiker TicTacToe entwickeln. Wir werden anhand dieses Beispiels die ersten Grundlagen des Programmierens erlernen und ein komplett funktionstüchtiges Spiel entwickeln.</p>
+    
+  </body>
+</html>
+anze praktisch greifbar machen und auch Ergebnisse sehen. Als erstes werden wir daher den Spiele-Klassiker TicTacToe entwickeln. Wir werden anhand dieses Beispiels die ersten Grundlagen des Programmierens erlernen und ein komplett funktionstüchtiges Spiel entwickeln.</p>
 
 <pre
     class="language-kotlin" data-target-platform="canvas"
@@ -102,6 +110,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
@@ -330,21 +339,22 @@ Verschiedene Sprachen haben verschiedene Hintergründe und sind oft für einen b
 
 <p>Nachdem wir eine genau Vorstellung haben wie unser fertiges Programm aussieht und der Benutzer mit ihm interagieren kann, wird das Programm in seine Einzelteile zerlegt die dann in Code verfasst werden. Wie genau die Einzelteile aussehen und miteinander interagieren ist flexibel und es ist die Aufgabe des Software-Entwicklers das zu entscheiden. Das ganze ist ein kreativer Prozess der etwas Übung bedarf.</p>
 
-<p>Wir können die oben genannte Stoppuhr zum Beispiel so aufteilen:</p>
+<p>Wir können die oben genannte Stoppuhr zum Beispiel in folgende grobe Pakete aufteilen:</p>
 
 <ul>
-<li>Zeichne die Uhr (ohne Zeiger) als Hintergrundbild. Dazu müssen wir ein Bild der Uhr haben auf dem keine Zeiger sichtbar sind.</li>
-<li>Zeichne die beiden Zeiger in neutraler Position (beide zeigen gerade nach oben).</li>
-<li>Nachdem der Benutzer auf die Uhr geklickt hat führe jede Sekunde folgende Schritte aus:
+<li>Erstellen einer virtuellen Leinwand auf der wir mittels Programmier-Befehle zeichnen können.</li>
+<li>Zeichnen der Uhr (ohne Zeiger) als Hintergrundbild auf die virtuelle Leinwand. Dazu müssen wir vorher ein Bild-Datei mit der Uhr haben auf dem keine Zeiger sichtbar sind.</li>
+<li>Zeichnen der beiden Zeiger in neutraler Position (beide zeigen gerade nach oben).</li>
+<li>Nachdem der Benutzer auf die Uhr geklickt hat führen wir jede Sekunde folgende Schritte aus:
 
 <ul>
-<li>Bewege den Sekundenzeiger ein Stück weiter im Uhrzeigersinn.</li>
-<li>Wenn eine Minute vergangen ist, bewege den Minutenzeiger ein Stück weiter im Uhrzeigersinn.</li>
+<li>Bewegen des Sekundenzeigers um ein kleines Stück weiter im Uhrzeigersinn.</li>
+<li>Wenn eine Minute vergangen ist: bewegen des Minutenzeigers ein Stück weiter im Uhrzeigersinn.</li>
 </ul></li>
-<li>Wenn der Benutzer auf die Uhr klickt und diese aktuell läuft, stoppe sie.</li>
+<li>Wenn der Benutzer auf die Uhr klickt und diese aktuell läuft: Stoppen der Uhr.</li>
 </ul>
 
-<p>Diese einzelnen Schritte können nun in Programmcode übersetzt werden. Dies ist einer der Hauptaufgaben beim Meistern des Programmierens. Dazu möchten wir an dieser Stelle aber nicht lange theoretisch reden sondern in den nächsten Abschnitten direkt in die Praxis übergehen und unser TicTacToeSpiel programmieren.</p>
+<p>Diese einzelnen Pakete können nun in Programmcode übersetzt werden. Dies ist einer der Hauptaufgaben beim Meistern des Programmierens. Dazu möchten wir an dieser Stelle aber nicht lange theoretisch reden sondern in den nächsten Abschnitten direkt in die Praxis übergehen und unser TicTacToeSpiel programmieren.</p>
 
 <h1 id="tictactoe">TicTacToe</h1>
 
@@ -384,7 +394,7 @@ Verschiedene Sprachen haben verschiedene Hintergründe und sind oft für einen b
 <p>TODO: Video mit erklärung des Canvas
 - Blatt papier, Kariert, moveTo, lineTo, arc</p>
 
-<p>Unser canvas hat eine Breite von <code>300</code> und eine Höhe von <code>350</code>. Mittels <code>context2d</code> können wir in 2D auf unserem canvas zeichnen. Hier der Programmcode um eine Line von links oben nach rechts unten zu zeichnen.</p>
+<p>Unser canvas hat eine Breite von <code>300</code> und eine Höhe von <code>350</code>. Dies haben wir im Hintergrund festgelegt. Grundsätzlich kann das canvas aber ein beliebige Breite und Höhe haben. Zur Abgrenzung vom Hintergrund haben wir unserer Leinwand auch noch einen grauen Rahmen gegeben. Mittels <code>context2d</code> können wir in 2D auf unserem canvas zeichnen. Hier der Programmcode um eine Line von links oben nach rechts unten zu zeichnen.</p>
 
 <pre
     class="language-kotlin" data-target-platform="canvas"
@@ -408,6 +418,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
@@ -486,6 +497,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
@@ -543,6 +555,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
@@ -599,6 +612,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
@@ -790,6 +804,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
@@ -895,6 +910,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
@@ -1038,6 +1054,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
@@ -1298,6 +1315,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
+    canvas.style.border = "1px dashed #CCC"
 
     document.body!!.append(canvas)
 
