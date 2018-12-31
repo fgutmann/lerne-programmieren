@@ -102,7 +102,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
-    canvas.style.border = "1px dashed #CCC"
+    
 
     document.body!!.append(canvas)
 
@@ -386,7 +386,7 @@ Verschiedene Sprachen haben verschiedene Hintergründe und sind oft für einen b
 <p>TODO: Video mit erklärung des Canvas
 - Blatt papier, Kariert, moveTo, lineTo, arc</p>
 
-<p>Unser canvas hat eine Breite von <code>300</code> und eine Höhe von <code>350</code>. Dies haben wir im Hintergrund festgelegt. Grundsätzlich kann das canvas aber ein beliebige Breite und Höhe haben. Zur Abgrenzung vom Hintergrund haben wir unserer Leinwand auch noch einen grauen Rahmen gegeben. Mittels <code>context2d</code> können wir in 2D auf unserem canvas zeichnen. Hier der Programmcode um eine Line von links oben nach rechts unten zu zeichnen.</p>
+<p>Unser canvas hat eine Breite von <code>300</code> und eine Höhe von <code>350</code>. Dies haben wir im Hintergrund festgelegt. Grundsätzlich kann das canvas aber ein beliebige Breite und Höhe haben. Zur Abgrenzung vom Hintergrund haben wir für dieses Beispiel unserer Leinwand auch noch einen grauen Rahmen gegeben. Mittels <code>context2d</code> können wir in 2D auf unserem canvas zeichnen. Hier der Programmcode um eine Line von links oben nach rechts unten zu zeichnen.</p>
 
 <pre
     class="language-kotlin" data-target-platform="canvas"
@@ -489,7 +489,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
-    canvas.style.border = "1px dashed #CCC"
+    
 
     document.body!!.append(canvas)
 
@@ -547,7 +547,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
-    canvas.style.border = "1px dashed #CCC"
+    
 
     document.body!!.append(canvas)
 
@@ -604,7 +604,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
-    canvas.style.border = "1px dashed #CCC"
+    
 
     document.body!!.append(canvas)
 
@@ -665,6 +665,8 @@ fun main() {
 
 <p>Funktionen können keine, einen oder mehrere Werte als Eingabe haben. Das sind die sogenannten Parameter. Mit diesen Parametern kann die Funktion Informationen erhalten die sie benötigt um ihre Arbeit zu verrichten.</p>
 
+<p>Das klingt jetzt recht kompliziert und theoretisch. Lies ein bisschen weiter und du wirst es anhand der praktischen Beispiele ein Stück weiter unten gleich viel besser verstehen.</p>
+
 <p>Zusätzlich kann eine Funktion auch einen Wert an den Code der die Funktion aufruft zurückliefern. Das ist der sogenannte return Wert. Nicht alle Funktionen geben einen Wert zurück.</p>
 
 <h3 id="funktionsaufrufe">Funktionsaufrufe</h3>
@@ -687,7 +689,7 @@ objekt.nameDerFunktion(parameter1, parameter2)
 
 <ol>
 <li>Zuerst kommt der Name des Objekts zu dem die Funktion gehört. Dieser Teil ist nicht immer vorhanden, weil nicht jede Funktion zu einem Objekt gehört.</li>
-<li>Durch einen Punkt wird dar Name des Objekts vom Namen der Funktion getrennt. Gehört die Funktion nicht zu einem Objekt, entfällt auch dieser Teil.</li>
+<li>Durch einen Punkt wird der Name des Objekts vom Namen der Funktion getrennt.</li>
 <li>Danach kommt der Name der Funktion.</li>
 <li>Eine runde Klammer auf <code>(</code> beendet den Funktionsnamen und beginnt die Liste der Parameter.</li>
 <li>Es folgen die Parameter die an die Funktion übergeben werden. Mehrere Parameter sind durch ein Komma getrennt. Es kann auch sein, dass keine Parameter vorhanden sind.</li>
@@ -772,7 +774,7 @@ fun nameDerFunktion() {
 <p>Wir werden Fachbegriffe wie &ldquo;function body&rdquo;, &ldquo;parameter&rdquo;, &ldquo;return value&rdquo; und dergleichen immer mehr auf Englisch verwenden, da diese in der Praxis so viel geläufiger sind. Diese Wörter kommen oft auch in der Programmiersprache selbst vor und sind dort immer in Englisch. Daher gibt es praktisch keinen Weg daran vorbei diese Wörter auf Englisch zu verstehen. Meist ist es nicht mal notwendig das Wort überhaupt auf Deutsch zu kennen da es sich hier um Fachbegriffe handelt die einfach immer auf Englisch verwendet werden. Das Wort &ldquo;Funktionskörper&rdquo; zum Beispiel habe ich bisher in der Praxis in über 15 Jahren noch nie gehört :-) Es ist einfach der &ldquo;function body&rdquo; oder &ldquo;body of the function&rdquo;.</p>
 </blockquote>
 
-<p>Unsere Funktion für das Zeichnen des Felds sieht fertig so aus:</p>
+<p>Unsere Funktion für das Zeichnen des Felds sieht fertig wie im folgenden Beispiel aus. Wenn du denkst dass etwas nicht funktioniert, lies noch ein Stück weiter ;-)</p>
 
 <pre
     class="language-kotlin" data-target-platform="canvas"
@@ -796,7 +798,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
-    canvas.style.border = "1px dashed #CCC"
+    
 
     document.body!!.append(canvas)
 
@@ -902,7 +904,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
-    canvas.style.border = "1px dashed #CCC"
+    
 
     document.body!!.append(canvas)
 
@@ -1046,7 +1048,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
-    canvas.style.border = "1px dashed #CCC"
+    
 
     document.body!!.append(canvas)
 
@@ -1307,7 +1309,7 @@ fun setupCanvas(): HTMLCanvasElement {
     canvas.style.width = "300px"
     canvas.style.height = "350px"
     canvas.style.margin = "10px 10px 0 10px"
-    canvas.style.border = "1px dashed #CCC"
+    
 
     document.body!!.append(canvas)
 
